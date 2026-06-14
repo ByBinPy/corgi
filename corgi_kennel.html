@@ -109,9 +109,7 @@
   .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .gallery-card { background: var(--white); box-shadow: 0 4px 24px var(--shadow); overflow: hidden; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
   .gallery-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(26,18,8,0.22); }
-  .gallery-card:first-child { grid-row: span 2; }
   .card-img { width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, #E8C99A, #D4956A); display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; overflow: hidden; transition: transform 0.4s; }
-  .gallery-card:first-child .card-img { aspect-ratio: unset; height: 100%; min-height: 300px; }
   .gallery-card:hover .card-img { transform: scale(1.04); }
   .card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.5) 0%, transparent 50%); pointer-events: none; }
   .card-img {
@@ -210,6 +208,96 @@
     transform: translateY(0);
   }
   .form-success { display: none; background: rgba(200,90,26,0.2); border: 1px solid var(--rust); padding: 20px 24px; color: var(--cream); font-size: 0.95rem; line-height: 1.6; margin-top: 8px; }
+  .puppies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: clamp(12px, 2vw, 24px);
+  }
+
+  .gallery-section.alt .puppies-grid .gallery-card:first-child {
+    grid-row: span 1 !important;
+  }
+
+  .puppies-grid .card-img {
+    aspect-ratio: 3 / 4;
+    height: unset;
+    min-height: unset;
+  }
+
+  .puppies-grid .card-img::after {
+    display: none;
+  }
+
+  .puppies-grid .card-body {
+    padding: clamp(12px, 2vw, 24px);
+  }
+
+  .puppies-grid .card-name {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+  }
+
+  .puppies-grid .card-sub {
+    font-size: clamp(0.65rem, 1.3vw, 0.78rem);
+  }
+
+  .puppies-grid .card-desc {
+    font-size: clamp(0.78rem, 1.5vw, 0.9rem);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .puppies-grid .card-meta {
+    gap: clamp(6px, 1vw, 16px);
+    margin-top: clamp(8px, 1.5vw, 16px);
+  }
+
+  .puppies-grid .card-meta span {
+    font-size: clamp(0.65rem, 1.1vw, 0.78rem);
+    padding: clamp(3px, 0.5vw, 4px) clamp(8px, 1vw, 12px);
+  }
+
+  .puppies-grid .card-click-hint {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+  }
+
+  @media (max-width: 600px) {
+    .puppies-grid {
+      grid-template-columns: 1fr;
+    }
+    .puppies-grid .card-img {
+      aspect-ratio: 2 / 3;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    .puppies-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 901px) {
+    .puppies-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+
+  .card-click-hint {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.4rem;
+    z-index: 3;
+    line-height: 1;
+  }
+
+  .puppies-grid .card-img::after {
+    display: none;
+  }
+  .gallery-card:hover .card-click-hint {
+    opacity: 1;
+  }
 
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
@@ -344,43 +432,120 @@
     <h2 class="section-title">Доступные <em>щенки</em></h2>
     <p class="section-desc">Каждый щенок уходит в новый дом с ветпаспортом, прививками, чипом, родословной РКФ и договором купли-продажи.</p>
   </div>
-  <div class="gallery-grid">
+  <div class="puppies-grid">
+
     <div class="gallery-card" onclick="openModal('pup1')">
-      <div class="card-img" style="background:linear-gradient(135deg,#FADA9C,#E8931A);"><img src="images/puppy1.jpg" alt="Puppy1"><span class="card-badge">Доступен</span></div>
+      <div class="card-img" style="background:linear-gradient(135deg,#FADA9C,#E8931A);">
+        <img src="images/avrora.jpg" alt="Аврора">
+        <span class="card-badge">Доступна</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
       <div class="card-body">
-        <div class="card-name">Foxfire Sun Chaser</div>
-        <div class="card-sub">Кобель · Помёт «F»</div>
-        <div class="card-desc">Яркий рыжий мальчик с великолепным типом. Папа — Чемпион России Legenda, мама — Amber. Рекомендован для шоу-карьеры.</div>
+        <div class="card-name">Адриано</div>
+        <div class="card-sub">Кобель · Помёт «A»</div>
+        <div class="card-desc">Яркий рыжий мальчик с великолепным типом. Рекомендован для шоу-карьеры.</div>
         <div class="card-meta"><span>3 мес.</span><span>Шоу-перспектива</span><span>Рыжий</span></div>
       </div>
     </div>
+
     <div class="gallery-card" onclick="openModal('pup2')">
-      <div class="card-img" style="background:linear-gradient(135deg,#F5C9A0,#C85A1A);"><img src="images/puppy2.jpg" alt="Puppy2"><span class="card-badge">Доступна</span></div>
+      <div class="card-img" style="background:linear-gradient(135deg,#F5C9A0,#C85A1A);">
+        <img src="images/aivengo_1.jpg" alt="Айвенго">
+        <span class="card-badge">Доступна</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
       <div class="card-body">
-        <div class="card-name">Foxfire Sweet Melody</div>
-        <div class="card-sub">Сука · Помёт «F»</div>
+        <div class="card-name">Айвенго</div>
+        <div class="card-sub">Сука · Помёт «А»</div>
         <div class="card-desc">Нежная соболиная девочка, очень дружелюбная. Хороший вариант для семьи с детьми.</div>
         <div class="card-meta"><span>3 мес.</span><span>Компаньон</span></div>
       </div>
     </div>
+
     <div class="gallery-card" onclick="openModal('pup3')">
-      <div class="card-img" style="background:linear-gradient(135deg,#FDE8C8,#E8C99A);"><img src="images/puppy3.jpg"  alt="Puppy3"><span class="card-badge" style="background:#7a5a2a;">Резерв</span></div>
+      <div class="card-img" style="background:linear-gradient(135deg,#FDE8C8,#E8C99A);">
+        <img src="images/amadey.jpg" alt="Амадей">
+        <span class="card-badge" style="background:#7a5a2a;">Резерв</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
       <div class="card-body">
-        <div class="card-name">Foxfire Star Blazer</div>
-        <div class="card-sub">Кобель · Помёт «F»</div>
+        <div class="card-name">Амадей</div>
+        <div class="card-sub">Кобель · Помёт «А»</div>
         <div class="card-desc">Уверенный, активный мальчик. Принят в резерв, возможно освобождение — уточняйте актуальность.</div>
         <div class="card-meta"><span>3 мес.</span><span>Шоу-линия</span></div>
       </div>
     </div>
+
     <div class="gallery-card" onclick="openModal('pup4')">
-      <div class="card-img" style="background:linear-gradient(135deg,#EAD9C8,#B89A78);"><img src="images/puppy4.jpg" alt="Puppy4"><span class="card-badge" style="background:var(--mid);">Ожидается</span></div>
+      <div class="card-img" style="background:linear-gradient(135deg,#F9E4C8,#D4956A);">
+        <img src="images/ararat.jpg" alt="Арарат">
+        <span class="card-badge">Доступна</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
       <div class="card-body">
-        <div class="card-name">Помёт «G» — ожидается</div>
-        <div class="card-sub">Litter «G» · Август 2025</div>
-        <div class="card-desc">Вязка: Copper King × Roxy Red Flame. Запись на щенков открыта. Ожидаем 4–6 щенков рыжего и соболиного окрасов.</div>
+        <div class="card-name">Арарат</div>
+        <div class="card-sub">Сука · Помёт «А»</div>
+        <div class="card-desc">Золотистая девочка с мягким характером. Легко обучается, хорошо реагирует на детей и других животных.</div>
+        <div class="card-meta"><span>3 мес.</span><span>Компаньон</span><span>Золотой</span></div>
+      </div>
+    </div>
+
+    <div class="gallery-card" onclick="openModal('pup5')">
+      <div class="card-img" style="background:linear-gradient(135deg,#FCEBD8,#E8931A);">
+        <img src="images/asensio.jpg" alt="Асенсио">
+        <span class="card-badge">Доступен</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Асенсио</div>
+        <div class="card-sub">Кобель · Помёт «А»</div>
+        <div class="card-desc">Энергичный рыжий мальчик с отличным экстерьером. Подойдёт активной семье или для спортивных дисциплин.</div>
+        <div class="card-meta"><span>3 мес.</span><span>Спорт / шоу</span><span>Рыжий</span></div>
+      </div>
+    </div>
+
+    <div class="gallery-card" onclick="openModal('pup6')">
+      <div class="card-img" style="background:linear-gradient(135deg,#F0DCC8,#C89A6A);">
+        <img src="images/adriano.jpg" alt="Адриано">
+        <span class="card-badge" style="background:#7a5a2a;">Доступен</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Адриано</div>
+        <div class="card-sub">Кобель · Помёт «А»</div>
+        <div class="card-desc">Соболиная девочка с шелковистой шерстью и уравновешенным темпераментом. В мягком резерве — уточняйте актуальность.</div>
+        <div class="card-meta"><span>3 мес.</span><span>Соболиный</span></div>
+      </div>
+    </div>
+
+    <div class="gallery-card" onclick="openModal('pup7')">
+      <div class="card-img" style="background:linear-gradient(135deg,#FADA9C,#C85A1A);">
+        <img src="images/aragorn.jpg" alt="Арагорн">
+        <span class="card-badge">Доступен</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Арагорн</div>
+        <div class="card-sub">Кобель · Помёт «А»</div>
+        <div class="card-desc">Крепкий, подвижный мальчик с выразительной мордочкой. Ласковый и любознательный — отлично вписывается в любую семью.</div>
+        <div class="card-meta"><span>3 мес.</span><span>Компаньон</span></div>
+      </div>
+    </div>
+
+    <div class="gallery-card" onclick="openModal('pup8')">
+      <div class="card-img" style="background:linear-gradient(135deg,#EAD9C8,#B89A78);">
+        <img src="images/appolon.jpg" alt="Апполон">
+        <span class="card-badge" style="background:var(--mid);">Ожидается</span>
+        <span class="card-click-hint">🔍 Подробнее</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Апполон</div>
+        <div class="card-sub">Litter «Б» · Август 2025</div>
+        <div class="card-desc">Вязка: Copper King × Roxy Red Flame. Запись открыта. Ожидаем 4–6 щенков рыжего и соболиного окрасов.</div>
         <div class="card-meta"><span>Август 2025</span><span>Запись открыта</span></div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -434,44 +599,6 @@
           <a href="https://www.youtube.com/@andpuppy" class="social-link"><span class="s-icon">▶️</span> YouTube</a>
           <a href="https://zooportal.pro/show/kennels/17810638/" class="social-link"><span class="s-icon">🐾</span> Наш питомник </a>
         </div>
-      </div>
-    </div>
-    <div>
-      <div class="contact-form">
-        <div class="form-row">
-          <div class="form-group">
-            <div class="form-group">
-              <label>Ваше имя</label>
-              <input type="text" placeholder="Имя">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Телефон / Telegram</label>
-            <label>
-              <input type="text" placeholder="+7 ">
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="email@example.com">
-        </div>
-        <div class="form-group">
-          <label>Интересует</label>
-          <select>
-            <option value="">— выберите —</option>
-            <option>Щенок для семьи (компаньон)</option>
-            <option>Щенок для шоу / разведения</option>
-            <option>Вопрос о породе</option>
-            <option>Другое</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Сообщение</label>
-          <textarea placeholder="Расскажите немного о себе: есть ли опыт с собаками, условия содержания, вопросы..."></textarea>
-        </div>
-        <button class="btn-primary" onclick="submitForm()" style="width:100%;padding:16px;">Отправить сообщение</button>
-        <div class="form-success" id="formSuccess">🐾 Спасибо! Мы получили ваше сообщение и свяжемся с вами в течение 24 часов.</div>
       </div>
     </div>
   </div>
